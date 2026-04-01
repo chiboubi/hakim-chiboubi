@@ -1,0 +1,5 @@
+{
+    "idx.ai.enableInlineCompletion": true,
+    "idx.ai.enableCodebaseIndexing": true,
+    "typescript.tsdk": "node_modules/typescript/lib"
+}

@@ -1,0 +1,78 @@
+
+{
+  "entities": {
+    "ScugpAnalytics": {
+      "title": "SCUGP Analytics Session",
+      "description": "Log of academic activities and simulations performed by users.",
+      "type": "object",
+      "properties": {
+        "studentId": { "type": "string" },
+        "module": { "type": "string" },
+        "payload": { "type": "object" },
+        "version": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentId", "module", "payload", "version", "timestamp"]
+    },
+    "SecurityAudit": {
+      "title": "Security Audit Log",
+      "description": "Immutable log of security-sensitive operations.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "action": { "type": "string" },
+        "status": { "type": "string", "enum": ["SUCCESS", "FAILED", "WARNING"] },
+        "ip": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "details": { "type": "string" }
+      },
+      "required": ["userId", "action", "status", "timestamp"]
+    },
+    "GlobalNetworkUpdate": {
+      "title": "Global Network Update",
+      "description": "External data packets from IEA/IRENA via Global Networks Bridge.",
+      "type": "object",
+      "properties": {
+        "source": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "global_stats": {
+          "type": "object",
+          "properties": {
+            "renewable_capacity": { "type": "object" },
+            "local_policy_status": { "type": "object" }
+          }
+        }
+      },
+      "required": ["source", "timestamp", "global_stats"]
+    },
+    "SovereignDecree": {
+      "title": "Sovereign Decree",
+      "description": "An intentional decree issued by the Sovereign to invert reality.",
+      "type": "object",
+      "properties": {
+        "intent": { "type": "string" },
+        "result": { "type": "string" },
+        "fidelity": { "type": "number" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["MATERIALIZING", "SCELLÉ", "OMNIPOTENT"] }
+      }
+    }
+  },
+  "auth": {
+    "providers": ["google.com"]
+  },
+  "firestore": {
+    "/security_audit/{auditId}": {
+      "schema": { "$ref": "#/backend/entities/SecurityAudit" },
+      "description": "System-wide security audit trail."
+    },
+    "/global_network_updates/{updateId}": {
+      "schema": { "$ref": "#/backend/entities/GlobalNetworkUpdate" },
+      "description": "Ingested data from IEA/IRENA bridge."
+    },
+    "/sovereign_decrees/{decreeId}": {
+      "schema": { "$ref": "#/backend/entities/SovereignDecree" },
+      "description": "Persistent record of Sovereign intentions."
+    }
+  }
+}

@@ -1,0 +1,109 @@
+
+version: '3.8'
+
+# =============================================================================
+# SYSTÈME UNIFIÉ DE CERTIFICATIONS DR. CHIBOUBI HAKIM v10.0
+# =============================================================================
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: ch-postgres
+    environment:
+      POSTGRES_DB: chiboubi_certs
+      POSTGRES_USER: ${DB_USER:-ch_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - ch-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: ch-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - ch-net
+
+  ipfs:
+    image: ipfs/kubo:latest
+    container_name: ch-ipfs
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    networks:
+      - ch-net
+
+  api-gateway:
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile.api
+    container_name: ch-gateway
+    environment:
+      PORT: 3002
+      RATE_LIMIT: 1000
+    depends_on:
+      - api-core
+    ports:
+      - "3002:3002"
+    networks:
+      - ch-net
+
+  api-core:
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile.api
+    container_name: ch-api-core
+    environment:
+      PORT: 3001
+      DB_HOST: postgres
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - ch-net
+
+  biometric-service:
+    image: tensorflow/tensorflow:latest-gpu
+    container_name: ch-biometric
+    environment:
+      PORT: 5000
+    ports:
+      - "5000:5000"
+    networks:
+      - ch-net
+
+  metaverse-service:
+    image: nginx:alpine
+    container_name: ch-metaverse
+    ports:
+      - "3007:80"
+    networks:
+      - ch-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ch-prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - ch-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ch-grafana
+    ports:
+      - "3009:3000"
+    networks:
+      - ch-net
+
+networks:
+  ch-net:
+    driver: bridge
+
+volumes:
+  postgres_data:

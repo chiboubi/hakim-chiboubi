@@ -1,0 +1,41 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "global-energy",
+      "description": "Satellite view of global energy activity",
+      "imageUrl": "https://picsum.photos/seed/energy/1200/600",
+      "imageHint": "energy activity"
+    },
+    {
+      "id": "satellite-mesh",
+      "description": "Orbital multi-sensor analysis",
+      "imageUrl": "https://picsum.photos/seed/satellite/800/400",
+      "imageHint": "satellite monitoring"
+    },
+    {
+      "id": "digital-twin-50",
+      "description": "4D energy asset visualization",
+      "imageUrl": "https://picsum.photos/seed/twin50/1000/600",
+      "imageHint": "digital twin"
+    },
+    {
+      "id": "neural-forecast",
+      "description": "LSTM and XGBoost prediction models",
+      "imageUrl": "https://picsum.photos/seed/forecast/600/400",
+      "imageHint": "predictive analysis"
+    },
+    {
+      "id": "aquifer-continental-intercalaire",
+      "description": "Nappe du Continental Intercalaire - Sahara Aquifer",
+      "imageUrl": "https://picsum.photos/seed/sahara-aquifer/1200/800",
+      "imageHint": "sahara aquifer"
+    },
+    {
+      "id": "sea-bathymetry",
+      "description": "Ocean bathymetry and currents map",
+      "imageUrl": "https://picsum.photos/seed/ocean-map/1200/800",
+      "imageHint": "ocean map"
+    }
+  ]
+}

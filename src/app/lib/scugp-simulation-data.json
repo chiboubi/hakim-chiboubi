@@ -1,0 +1,14 @@
+
+{
+  "project_id": "ARC-2026-V60",
+  "name": "Arctic Deepwater Simulation",
+  "modules": {
+    "geoPredictor": "active",
+    "carbonAdaptiveLoop": "enabled",
+    "hybridEnergyLayer": "GNL + Cryo"
+  },
+  "metrics": {
+    "opExReduction": "25%",
+    "netZeroCompliance": true
+  }
+}

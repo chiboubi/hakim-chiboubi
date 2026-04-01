@@ -1,0 +1,140 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 231 48% 94%;
+    --foreground: 231 60% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 231 60% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 231 60% 10%;
+    --primary: 231 48% 48%;
+    --primary-foreground: 231 48% 98%;
+    --secondary: 231 48% 90%;
+    --secondary-foreground: 231 48% 20%;
+    --muted: 231 20% 90%;
+    --muted-foreground: 231 20% 40%;
+    --accent: 231 48% 48%;
+    --accent-foreground: 231 48% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 231 30% 85%;
+    --input: 231 30% 85%;
+    --ring: 231 48% 48%;
+    --radius: 0.75rem;
+  }
+  .dark {
+    --background: 231 48% 5%;
+    --foreground: 231 48% 98%;
+    --card: 231 48% 10%;
+    --card-foreground: 231 48% 98%;
+    --popover: 231 48% 10%;
+    --popover-foreground: 231 48% 98%;
+    --primary: 231 48% 60%;
+    --primary-foreground: 231 48% 5%;
+    --secondary: 231 48% 20%;
+    --secondary-foreground: 231 48% 98%;
+    --muted: 231 20% 20%;
+    --muted-foreground: 231 20% 70%;
+    --accent: 231 48% 60%;
+    --accent-foreground: 231 48% 5%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 231 30% 25%;
+    --input: 231 30% 25%;
+    --ring: 231 48% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}
+
+@keyframes slide-down {
+  from { top: -10%; }
+  to { top: 110%; }
+}
+
+@keyframes rotate-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scan-laser {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  50% { top: 100%; opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 0%; opacity: 0; }
+}
+
+@keyframes shine {
+  from { transform: translateX(-100%) rotate(45deg); }
+  to { transform: translateX(100%) rotate(45deg); }
+}
+
+.animate-rotate-ring {
+  animation: rotate-ring 40s linear infinite;
+}
+
+.animate-scan-laser {
+  animation: scan-laser 2s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
+}
+
+@keyframes reverse-spin {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-reverse-spin {
+  animation: reverse-spin 10s linear infinite;
+}
+
+.animate-shine {
+  animation: shine 3s infinite;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c9a227;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #b8941f;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  body {
+    background: white !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+  }
+  .print-hidden {
+    display: none !important;
+  }
+}
